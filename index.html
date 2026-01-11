@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>For My Beloved Wife</title>
+    <style>
+        body {
+            background: #fff0f6;
+            font-family: 'Georgia', serif;
+            text-align: center;
+            padding-top: 60px;
+            color: #b30059;
+        }
+        h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(179, 0, 89, 0.4);
+        }
+        p {
+            font-size: 24px;
+            margin: 0 auto;
+            max-width: 700px;
+            line-height: 1.5;
+        }
+        .heart {
+            color: #ff0066;
+            font-size: 60px;
+            animation: beat 1s infinite;
+        }
+        @keyframes beat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+        button {
+            font-size: 20px;
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        .yes-btn { background-color: #ff6699; color: white; }
+        .no-btn { background-color: #cccccc; color: black; }
+        #response {
+            font-size: 26px;
+            margin-top: 30px;
+            color: #e60073;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="heart">❤️</div>
+    <h1>To My Beautiful Wife Subi</h1>
+    <p>
+        You are my heart, my joy, my every sunrise —  
+        this page is just a whisper of all the love I hold for you.
+    </p>
+
+    <p style="font-size: 32px; margin-top: 40px; color: #e60073;">
+        I Love You ❤️
+    </p>
+
+    <h2 style="margin-top: 60px; color: #b30059;">Will you be mine forever?</h2>
+
+    <button class="yes-btn" onclick="chooseAnswer('yes')">Yes 😍</button>
+    <button class="no-btn" onclick="chooseAnswer('no')">No 😢</button>
+
+    <p id="response"></p>
+
+    <!-- Romantic sound (Use a soft audio you like) -->
+    <audio id="loveSound" src="romantic.mp3"></audio>
+
+    <!-- Confetti canvas -->
+    <canvas id="confettiCanvas" style="position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none;"></canvas>
+
+    <script>
+        function chooseAnswer(answer) {
+            const responseEl = document.getElementById("response");
+            const sound = document.getElementById("loveSound");
+            responseEl.innerText = "";
+
+            if (answer === "yes") {
+                responseEl.innerText = "🌹 My heart is yours forever! I love you, Subi! 🌹";
+                playConfetti();
+                sound.play(); 
+            } else {
+                responseEl.innerText = "Even if you choose no, I’ll still love you always 💖";
+            }
+        }
+
+        // Simple confetti animation
+        function playConfetti() {
+            const canvas = document.getElementById("confettiCanvas");
+            const ctx = canvas.getContext("2d");
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            const confetti = [];
+            for (let i = 0; i < 150; i++) {
+                confetti.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height - canvas.height,
+                    r: Math.random() * 6 + 4,
+                    d: Math.random() * 20 + 10,
+                    color: ['#ff0066','#ff66b2','#ff99cc','#ff3399'][Math.floor(Math.random()*4)],
+                    tilt: Math.random() * 10 - 10,
+                    tiltAngleIncrement: Math.random() * 0.07 + 0.05,
+                    tiltAngle: 0
+                });
+            }
+
+            function draw() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                confetti.forEach(c => {
+                    ctx.beginPath();
+                    ctx.lineWidth = c.r;
+                    ctx.strokeStyle = c.color;
+                    ctx.moveTo(c.x + c.tilt + c.r / 2, c.y);
+                    ctx.lineTo(c.x + c.tilt, c.y + c.tilt + c.r / 2);
+                    ctx.stroke();
+                });
+                update();
+            }
+
+            function update() {
+                confetti.forEach(c => {
+                    c.tiltAngle += c.tiltAngleIncrement;
+                    c.y += (Math.cos(c.d) + 3 + c.r / 2) / 2;
+                    c.tilt = Math.sin(c.tiltAngle) * 15;
+                    if (c.y > canvas.height) {
+                        c.y = 0;
+                        c.x = Math.random() * canvas.width;
+                    }
+                });
+            }
+
+            function animate() {
+                draw();
+                requestAnimationFrame(animate);
+            }
+            animate();
+        }
+    </script>
+
+</body>
+</html>
