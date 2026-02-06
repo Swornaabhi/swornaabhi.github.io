@@ -1,148 +1,202 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>For My Beloved Wife</title>
-    <style>
-        body {
-            background: #fff0f6;
-            font-family: 'Georgia', serif;
-            text-align: center;
-            padding-top: 60px;
-            color: #b30059;
-        }
-        h1 {
-            font-size: 48px;
-            margin-bottom: 20px;
-            letter-spacing: 2px;
-            text-shadow: 2px 2px 4px rgba(179, 0, 89, 0.4);
-        }
-        p {
-            font-size: 24px;
-            margin: 0 auto;
-            max-width: 700px;
-            line-height: 1.5;
-        }
-        .heart {
-            color: #ff0066;
-            font-size: 60px;
-            animation: beat 1s infinite;
-        }
-        @keyframes beat {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.2); }
-        }
-        button {
-            font-size: 20px;
-            padding: 10px 20px;
-            margin: 10px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-        }
-        .yes-btn { background-color: #ff6699; color: white; }
-        .no-btn { background-color: #cccccc; color: black; }
-        #response {
-            font-size: 26px;
-            margin-top: 30px;
-            color: #e60073;
-        }
-    </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>For Subi ❤️</title>
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Segoe UI', sans-serif;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(to right, #ff758c, #ff7eb3);
+        color: white;
+        text-align: center;
+        overflow: hidden;
+    }
+
+    .container {
+        position: relative;
+        background: rgba(255, 255, 255, 0.15);
+        padding: 40px;
+        border-radius: 20px;
+        backdrop-filter: blur(12px);
+        z-index: 2;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+        margin-bottom: 15px;
+    }
+
+    p {
+        font-size: 1.2rem;
+        margin-bottom: 25px;
+    }
+
+    button {
+        padding: 15px 30px;
+        font-size: 18px;
+        border: none;
+        border-radius: 30px;
+        cursor: pointer;
+        margin: 10px;
+    }
+
+    #yesBtn {
+        background-color: #4CAF50;
+        color: white;
+    }
+
+    #noBtn {
+        background-color: #ff4d4d;
+        color: white;
+        position: absolute;
+        left: 60%;
+        top: 75%;
+    }
+
+    #message {
+        font-size: 2rem;
+        margin-top: 20px;
+        display: none;
+        animation: fadeIn 2s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+        from {opacity: 0; transform: scale(0.8);} 
+        to {opacity: 1; transform: scale(1);} 
+    }
+
+    /* Floating hearts */
+    .heart {
+        position: absolute;
+        color: rgba(255,255,255,0.7);
+        font-size: 20px;
+        animation: float 6s linear infinite;
+    }
+
+    @keyframes float {
+        0% { transform: translateY(100vh); opacity: 1; }
+        100% { transform: translateY(-10vh); opacity: 0; }
+    }
+
+    /* Love letter popup */
+    #letter {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: white;
+        color: #ff4d6d;
+        padding: 30px;
+        border-radius: 20px;
+        width: 300px;
+        z-index: 3;
+        box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    }
+
+    #letter button {
+        margin-top: 15px;
+        background: #ff4d6d;
+        color: white;
+    }
+
+</style>
 </head>
+
 <body>
 
-    <div class="heart">❤️</div>
-    <h1>To My Beautiful Wife Subi</h1>
+<!-- Background Music -->
+<audio autoplay loop>
+    <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mp3">
+</audio>
+
+<div class="container" id="box">
+    <h1>Subi, will you be my Valentine? ❤️</h1>
     <p>
-        You are my heart, my joy, my every sunrise —  
-        this page is just a whisper of all the love I hold for you.
+        You are the most special part of my life. Distance may keep us apart,
+        but my heart is always with you. Thank you for loving me and making
+        my world brighter every day. ❤️
     </p>
 
-    <p style="font-size: 32px; margin-top: 40px; color: #e60073;">
-        I Love You ❤️
+    <button id="yesBtn">Yes 💖</button>
+    <button id="noBtn">No 😢</button>
+
+    <div id="message">
+        Yayyyyy ❤️<br><br>
+        Subi, thank you for being mine.
+        You make my life more beautiful every day.
+        I am so lucky to have you in my life.
+        I love you forever ❤️
+        <br><br>
+        <button onclick="openLetter()">Open Love Letter 💌</button>
+    </div>
+</div>
+
+<!-- Love Letter -->
+<div id="letter">
+    <h3>My Dear Subi ❤️</h3>
+    <p>
+        No matter the distance between us, my love for you never changes.
+        You are my happiness, my peace, and my forever.
+        Thank you for standing beside me in every moment of life.
     </p>
+    <button onclick="closeLetter()">Close ❤️</button>
+</div>
 
-    <h2 style="margin-top: 60px; color: #b30059;">Will you be mine forever?</h2>
+<script>
 
-    <button class="yes-btn" onclick="chooseAnswer('yes')">Yes 😍</button>
-    <button class="no-btn" onclick="chooseAnswer('no')">No 😢</button>
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+    const message = document.getElementById("message");
+    const box = document.getElementById("box");
 
-    <p id="response"></p>
+    noBtn.addEventListener("mouseenter", () => {
+        const boxRect = box.getBoundingClientRect();
 
-    <!-- Romantic sound (Use a soft audio you like) -->
-    <audio id="loveSound" src="romantic.mp3"></audio>
+        const x = Math.random() * (boxRect.width - noBtn.offsetWidth);
+        const y = Math.random() * (boxRect.height - noBtn.offsetHeight);
 
-    <!-- Confetti canvas -->
-    <canvas id="confettiCanvas" style="position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none;"></canvas>
+        noBtn.style.left = x + "px";
+        noBtn.style.top = y + "px";
+    });
 
-    <script>
-        function chooseAnswer(answer) {
-            const responseEl = document.getElementById("response");
-            const sound = document.getElementById("loveSound");
-            responseEl.innerText = "";
+    yesBtn.addEventListener("click", () => {
+        message.style.display = "block";
+    });
 
-            if (answer === "yes") {
-                responseEl.innerText = "🌹 My heart is yours forever! I love you, Subi! 🌹";
-                playConfetti();
-                sound.play(); 
-            } else {
-                responseEl.innerText = "Even if you choose no, I’ll still love you always 💖";
-            }
-        }
+    function openLetter() {
+        document.getElementById("letter").style.display = "block";
+    }
 
-        // Simple confetti animation
-        function playConfetti() {
-            const canvas = document.getElementById("confettiCanvas");
-            const ctx = canvas.getContext("2d");
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
+    function closeLetter() {
+        document.getElementById("letter").style.display = "none";
+    }
 
-            const confetti = [];
-            for (let i = 0; i < 150; i++) {
-                confetti.push({
-                    x: Math.random() * canvas.width,
-                    y: Math.random() * canvas.height - canvas.height,
-                    r: Math.random() * 6 + 4,
-                    d: Math.random() * 20 + 10,
-                    color: ['#ff0066','#ff66b2','#ff99cc','#ff3399'][Math.floor(Math.random()*4)],
-                    tilt: Math.random() * 10 - 10,
-                    tiltAngleIncrement: Math.random() * 0.07 + 0.05,
-                    tiltAngle: 0
-                });
-            }
+    /* Create floating hearts */
+    function createHeart() {
+        const heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.innerHTML = "❤️";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.fontSize = Math.random() * 20 + 15 + "px";
+        document.body.appendChild(heart);
 
-            function draw() {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                confetti.forEach(c => {
-                    ctx.beginPath();
-                    ctx.lineWidth = c.r;
-                    ctx.strokeStyle = c.color;
-                    ctx.moveTo(c.x + c.tilt + c.r / 2, c.y);
-                    ctx.lineTo(c.x + c.tilt, c.y + c.tilt + c.r / 2);
-                    ctx.stroke();
-                });
-                update();
-            }
+        setTimeout(() => {
+            heart.remove();
+        }, 6000);
+    }
 
-            function update() {
-                confetti.forEach(c => {
-                    c.tiltAngle += c.tiltAngleIncrement;
-                    c.y += (Math.cos(c.d) + 3 + c.r / 2) / 2;
-                    c.tilt = Math.sin(c.tiltAngle) * 15;
-                    if (c.y > canvas.height) {
-                        c.y = 0;
-                        c.x = Math.random() * canvas.width;
-                    }
-                });
-            }
+    setInterval(createHeart, 400);
 
-            function animate() {
-                draw();
-                requestAnimationFrame(animate);
-            }
-            animate();
-        }
-    </script>
+</script>
 
 </body>
 </html>
